@@ -5,31 +5,97 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Will You Be My Valentine?</title>
     <style>
-        body { text-align: center; font-family: Arial, sans-serif; }
-        .button { padding: 10px 20px; margin: 10px; background-color: pink; border: none; border-radius: 5px; cursor: pointer; }
-        .confetti { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; }
+        body {
+            background: linear-gradient(to right, #ff7e5f, #feb47b);
+            text-align: center;
+            overflow: hidden;
+            animation: backgroundAnimation 10s infinite alternate;
+        }
+
+        @keyframes backgroundAnimation {
+            from {
+                background: linear-gradient(to right, #ff7e5f, #feb47b);
+            }
+            to {
+                background: linear-gradient(to right, #86e3ce, #6c63ff);
+            }
+        }
+
+        h1 {
+            color: #fff;
+            font-size: 4rem;
+            margin-top: 20%;
+            animation: fadeIn 2s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .confetti {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            opacity: 0.5;
+        }
+
+        .heart {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: red;
+            clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+            animation: float 5s infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0); }
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 1.5rem;
+            color: white;
+            background-color: #ff007f;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        button:hover {
+            transform: scale(1.1);
+        }
     </style>
 </head>
 <body>
+    <div class="confetti"></div>
     <h1>Will You Be My Valentine?</h1>
-    <img src="IMG_0576.jpeg" alt="Couple Image" style="width: 50%;">
-    <div>
-        <button class="button" onclick="celebrate()">YES</button>
-        <button class="button" onclick="funnyMessage()">NO</button>
-    </div>
+    <button onclick="alert('Yay! ❤️')">Say Yes!</button>
+    <div class="heart"></div>
     <script>
-        function celebrate() {
-            // Add confetti animation here
-            var confetti = document.createElement('div');
+        function createConfetti() {
+            const confetti = document.createElement('div');
             confetti.classList.add('confetti');
+            const size = Math.random() * 10 + 5;
+            confetti.style.width = size + 'px';
+            confetti.style.height = size + 'px';
+            confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+            confetti.style.position = 'absolute';
+            confetti.style.left = Math.random() * window.innerWidth + 'px';
+            confetti.style.top = Math.random() * window.innerHeight + 'px';
             document.body.appendChild(confetti);
-            // Sample confetti animation logic
-            setTimeout(() => { confetti.remove(); }, 3000);
-            alert('Yay! Happy Valentine\'s Day! 🎉');
+            setTimeout(() => confetti.remove(), 3000);
         }
-        function funnyMessage() {
-            alert('Valentine’s Day is just another day to appreciate your food! 😂');
-        }
+
+        setInterval(createConfetti, 100);
     </script>
 </body>
 </html>
