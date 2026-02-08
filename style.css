@@ -1,0 +1,49 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+body {
+  font-family: 'Georgia', serif;
+  background-color: #fff0f5;
+  color: #333;
+}
+
+h1, h2, h3 {
+  font-family: 'Romantic', cursive;
+  color: #ff69b4;
+  text-align: center;
+}
+
+button {
+  background-color: #ff1493;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background-color: #ff69b4;
+  transform: scale(1.1);
+}
+
+.footer {
+  text-align: center;
+  padding: 20px;
+  background-color: #ffb6c1;
+}
+
+@media (max-width: 768px) {
+  body {
+    font-size: 14px;
+  }
+  button {
+    width: 100%;
+    font-size: 14px;
+  }
+}
