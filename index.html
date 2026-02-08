@@ -1,10 +1,92 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Will You Be My Valentine?</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffebee;
+            text-align: center;
+            color: #d81b60;
+        }
+        h1 {
+            font-size: 3em;
+            margin: 20px 0;
+        }
+        #countdown {
+            font-size: 2em;
+            margin: 20px 0;
+            color: #c2185b;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 1.5em;
+            margin: 10px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #d81b60;
+            color: white;
+        }
+        button:hover {
+            background-color: #c2185b;
+        }
+        .confetti {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            display: none;
+        }
+    </style>
 </head>
 <body>
-    <h1>Will You Be My Valentine?</h1>
-    <img src="IMG_0576.jpeg" alt="Valentine's Image">
+    <img src="IMG_0576.jpeg" alt="Romantic Image" style="width: 50%; height: auto;">
+    <h1>Tyrez and Orlane</h1>
+    <p>Will You Be My Valentine?</p>
+    <div id="info-box">
+        <p>Locked in from 09•17•25</p>
+    </div>
+    <div id="countdown"></div>
+    <button id="yes-button">YES</button>
+    <button id="no-button">NO</button>
+    <div class="confetti" id="confetti"></div>
+    <script>
+        const countdownDate = new Date('2026-09-17T00:00:00').getTime();
+        const countdownElement = document.getElementById('countdown');
+
+        const updateCountdown = () => {
+            const now = new Date().getTime();
+            const distance = countdownDate - now;
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            countdownElement.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+        };
+
+        // Update the countdown every second
+        setInterval(updateCountdown, 1000);
+
+        // Confetti effect on YES button click
+        document.getElementById('yes-button').onclick = function() {
+            const confetti = document.getElementById('confetti');
+            confetti.style.display = 'block';
+            // Simple confetti effect
+            for(let i = 0; i < 100; i++) {
+                const piece = document.createElement('div');
+                piece.style.width = '10px';
+                piece.style.height = '10px';
+                piece.style.backgroundColor = '#ff4081';
+                piece.style.position = 'absolute';
+                piece.style.top = Math.random() * 100 + 'vh';
+                piece.style.left = Math.random() * 100 + 'vw';
+                confetti.appendChild(piece);
+                setTimeout(() => piece.remove(), 3000);
+            }
+        };
+    </script>
 </body>
 </html>
