@@ -3,82 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Will You Be My Valentine?</title>
+    <title>Valentine's Day Website</title>
     <style>
         body {
             margin: 0;
-            height: 100vh;
+            padding: 0;
+            background: linear-gradient(45deg, #ff5c93, #ffb5c5);
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+        }
+        .container {
             display: flex;
             flex-direction: column;
-            align-items: center;
             justify-content: center;
-            animation: gradient 15s ease infinite;
-            overflow: hidden;
+            align-items: center;
+            height: 100vh;
+            position: relative;
         }
-
-        @keyframes gradient {
-            0% { background-color: #FF5733; }
-            50% { background-color: #FF33A1; }
-            100% { background-color: #FF5733; }
+        h1 {
+            color: #fff;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
         }
-
-        .heart {
-            width: 50px;
-            height: 50px;
-            background-color: red;
+        .rose {
             position: absolute;
-            animation: float 3s infinite;
-            transform: rotate(45deg);
+            animation: float 5s infinite;
+            font-size: 3em;
+            pointer-events: none;
         }
-
         @keyframes float {
             0% { transform: translateY(0); }
             50% { transform: translateY(-20px); }
             100% { transform: translateY(0); }
         }
-
-        .buttons {
-            margin-top: 20px;
-        }
-
         .button {
             padding: 10px 20px;
-            margin: 10px;
+            margin: 20px;
             border: none;
             border-radius: 5px;
+            background-color: #ff6b81;
+            color: white;
+            font-size: 1.5em;
             cursor: pointer;
-            font-size: 18px;
+            transition: all 0.3s ease;
         }
-
-        .yes {
-            background-color: green;
-            color: white;
-        }
-
-        .no {
-            background-color: red;
-            color: white;
+        .button:hover { transform: scale(1.1); }
+        .no-button {
+            position: absolute;
+            right: 10%;
+            bottom: 10%;
         }
     </style>
 </head>
 <body>
-    <h1>Will You Be My Valentine?</h1>
-    <img src="path-to-your-photo.jpg" alt="Photo Display" style="max-width: 300px; border-radius: 15px;"></img>
-    <div class="buttons">
-        <button class="button yes">YES</button>
-        <button class="button no">NO</button>
+    <div class="container">
+        <h1>Will You Be My Valentine? 🌹</h1>
+        <button class="button yes-button">YES 🌹</button>
+        <button class="button no-button">NO ❌</button>
+        <div id="confetti"></div>
     </div>
     <script>
-        document.querySelector('.yes').addEventListener('click', function() {
-            alert('Yay! Love wins!');
-            // Add confetti and animation logic here
+        const yesButton = document.querySelector('.yes-button');
+        const noButton = document.querySelector('.no-button');
+        const confetti = document.getElementById('confetti');
+
+        // Interactive effects for YES button
+        yesButton.addEventListener('click', () => {
+            confettiAnimation();
+            alert('Yay! ❤️ You said YES!');
         });
 
-        document.querySelector('.no').addEventListener('click', function() {
-            alert('Oh no! More chocolates for me!');
-            // Add funny animation logic here
+        // NO button that runs away
+        noButton.addEventListener('click', () => {
+            noButton.style.transition = 'transform 0.5s';
+            noButton.style.transform = `translate(${Math.random() * 200 - 100}px, ${Math.random() * -100}px)`;
+            alert('Aww... 😢 You said NO!');
         });
+
+        // Confetti animation
+        function confettiAnimation() {
+            // Simplified confetti animation logic
+            for (let i = 0; i < 100; i++) {
+                let confettiPiece = document.createElement('div');
+                confettiPiece.className = 'rose';
+                confettiPiece.innerHTML = '🌹';
+                confettiPiece.style.left = `${Math.random() * 100}vw`;
+                confettiPiece.style.top = `${Math.random() * 100}vh`;
+                document.body.appendChild(confettiPiece);
+                setTimeout(() => confettiPiece.remove(), 3000);
+            }
+        }
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/canvas-confetti/1.4.0/confetti.browser.min.js"></script>
 </body>
 </html>
