@@ -3,48 +3,263 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Will You Be My Valentine?</title>
+    <title>Tyrez ❤️ Orlane - Will You Be My Valentine?</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
-        body { text-align: center; background-color: #f9f9f9; }
-        .photo { width: 250px; }
-        .countdown { font-size: 24px; margin-top: 20px; }
-        .hearts { /* Add heart animation styles */ }
-        .roses { /* Add rose animation styles */ }
-        .confetti { /* Add confetti animation styles */ }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #fff5f7 0%, #ffe4e9 100%);
+            font-family: 'Georgia', serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.98);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(255, 105, 180, 0.3);
+            max-width: 1000px;
+        }
+
+        .image-section {
+            flex: 1;
+            text-align: center;
+        }
+
+        .image-section img {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(255, 105, 180, 0.3);
+            border: 5px solid #ff69b4;
+        }
+
+        .content-section {
+            flex: 1;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            color: #c71585;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 2em;
+            color: #ff69b4;
+            margin-bottom: 25px;
+            text-align: center;
+            font-style: italic;
+        }
+
+        .info-box {
+            background: linear-gradient(135deg, rgba(255, 20, 147, 0.1), rgba(255, 105, 180, 0.1));
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            border-left: 5px solid #ff69b4;
+            text-align: center;
+        }
+
+        .info-box p {
+            color: #333;
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+
+        .timer-box {
+            background: linear-gradient(135deg, #ff69b4, #ff1493);
+            color: white;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(255, 20, 147, 0.3);
+        }
+
+        .timer-label {
+            font-size: 1em;
+            opacity: 0.95;
+            margin-bottom: 10px;
+        }
+
+        #timer {
+            font-size: 2em;
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+            letter-spacing: 2px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 16px 45px;
+            font-size: 1.3em;
+            font-weight: bold;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        #yesBtn {
+            background: linear-gradient(135deg, #ff69b4, #ff1493);
+            color: white;
+        }
+
+        #yesBtn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 25px rgba(255, 20, 147, 0.5);
+        }
+
+        #yesBtn:active {
+            transform: scale(0.95);
+        }
+
+        #noBtn {
+            background: white;
+            color: #ff69b4;
+            border: 3px solid #ff69b4;
+        }
+
+        #noBtn:hover {
+            background: #ffe4e9;
+            transform: scale(1.05);
+        }
+
+        #noBtn:active {
+            transform: scale(0.95);
+        }
+
+        #result {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #ff1493;
+            text-align: center;
+            min-height: 50px;
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 968px) {
+            .container {
+                flex-direction: column;
+                padding: 25px;
+                gap: 25px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            h2 {
+                font-size: 1.5em;
+            }
+
+            button {
+                padding: 14px 35px;
+                font-size: 1.1em;
+            }
+
+            .image-section img {
+                max-width: 300px;
+            }
+        }
     </style>
 </head>
 <body>
-    <img class="photo" src="your-image-url.jpg" alt="Valentine's Image">
-    <h1>Will You Be My Valentine?</h1>
-    <p class="romantic-text">Your love is my warmth and joy. Let’s make this Valentine’s unforgettable!</p>
-    
-    <div class="countdown" id="countdown"></div>
-    
-    <div>
-        <button onclick="handleResponse('yes')">YES</button>
-        <button onclick="handleResponse('no')">NO</button>
+    <div class="container">
+        <div class="image-section">
+            <img src="Img" alt="Tyrez and Orlane">
+        </div>
+
+        <div class="content-section">
+            <h1>Tyrez ❤️ Orlane</h1>
+            <h2>Will You Be My Valentine?</h2>
+            
+            <div class="info-box">
+                <p>Locked in from 09•17•25 at 12:37 AM</p>
+                <p><strong>Choosing each other, always.</strong></p>
+            </div>
+
+            <div class="timer-box">
+                <div class="timer-label">Together for:</div>
+                <div id="timer">Loading...</div>
+            </div>
+
+            <div class="buttons">
+                <button id="yesBtn">YES 🖤</button>
+                <button id="noBtn">NO 🙈</button>
+            </div>
+
+            <div id="result"></div>
+        </div>
     </div>
 
     <script>
-        // Countdown timer logic
-        const countdownDate = new Date("2026-02-14T00:00:00Z").getTime();
-        const countdownFunction = setInterval(() => {
-            const now = new Date().getTime();
-            const distance = countdownDate - now;
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-            document.getElementById("countdown").innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
-            if (distance < 0) {
-                clearInterval(countdownFunction);
-                document.getElementById("countdown").innerHTML = "EXPIRED";
-            }
-        }, 1000);
-        
-        function handleResponse(answer) {
-            alert(`You answered: ${answer}`);
+        function updateTimer() {
+            const startDate = new Date('2025-09-17T00:37:00');
+            const now = new Date();
+            const difference = now - startDate;
+
+            const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+            document.getElementById('timer').innerHTML = days + 'd ' + hours + 'h ' + minutes + 'm ' + seconds + 's';
         }
+
+        document.getElementById('yesBtn').addEventListener('click', function() {
+            confetti({
+                particleCount: 250,
+                spread: 80,
+                origin: { y: 0.5 },
+                colors: ['#ff69b4', '#ff1493', '#c71585', '#ff69b4', '#ffb6c1']
+            });
+
+            document.getElementById('result').innerHTML = '💕 YES! SHE SAID YES! 💕';
+            document.getElementById('yesBtn').disabled = true;
+            document.getElementById('noBtn').disabled = true;
+        });
+
+        document.getElementById('noBtn').addEventListener('click', function() {
+            document.getElementById('result').innerHTML = 'I will ask again! 💔';
+        });
+
+        window.addEventListener('load', function() {
+            updateTimer();
+            setInterval(updateTimer, 1000);
+        });
     </script>
 </body>
 </html>
