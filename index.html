@@ -1,82 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Valentine's Day</title>
-    <style>
-        body {
-            background: linear-gradient(to right, #ff7e5f, #feb47b);
-            color: white;
-            text-align: center;
-            font-family: 'Arial', sans-serif;
-            position: relative;
-        }
-        h1 {
-            font-size: 2.5em;
-            margin-top: 20px;
-        }
-        #timer {
-            font-size: 1.5em;
-            margin: 20px 0;
-        }
-        .button {
-            background-color: #ff4c4c;
-            border: none;
-            color: white;
-            font-size: 1.2em;
-            padding: 10px 20px;
-            cursor: pointer;
-            border-radius: 5px;
-        }
-        .confetti {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            pointer-events: none;
-            background: url('https://example.com/confetti.gif') no-repeat center;
-            display: none;
-        }
-    </style>
+    <title>Will you be my Valentine?</title>
 </head>
 <body>
-    <h1>Tyrez ❤️ Orlane - Will You Be My Valentine?</h1>
-    <p id="timer"></p>
-    <img src="couple_photo.jpg" alt="Couple Photo" style="width: 50%; border-radius: 10px;">
-    <div class="confetti" id="confetti"></div>
-    <button class="button" id="yes">YES</button>
-    <button class="button" id="no">NO</button>
-
-    <p>Locked in from 09•17•25 at 12:37 AM - Choosing each other, always.</p>
-
-    <script>
-        const startDate = new Date('2025-09-17T00:37:00Z');
-        const timerElement = document.getElementById('timer');
-        const yesButton = document.getElementById('yes');
-        const noButton = document.getElementById('no');
-        const confettiElement = document.getElementById('confetti');
-
-        function updateTimer() {
-            const now = new Date();
-            const diff = Math.floor((now - startDate) / 1000);
-            const days = Math.floor(diff / (3600 * 24));
-            const hours = Math.floor((diff % (3600 * 24)) / 3600);
-            const minutes = Math.floor((diff % 3600) / 60);
-            const seconds = diff % 60;
-            timerElement.innerText = `Time together: ${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds.`;
-        }
-
-        yesButton.addEventListener('click', () => {
-            confettiElement.style.display = 'block';
-            // Call a function to trigger confetti effect
-        });
-        noButton.addEventListener('click', () => {
-            confettiElement.style.display = 'none';
-        });
-
-        setInterval(updateTimer, 1000);
-    </script>
+    <h1>Will you be my Valentine?</h1>
+    <img src="IMG_0573.jpeg" alt="Couple photo">
 </body>
 </html>
