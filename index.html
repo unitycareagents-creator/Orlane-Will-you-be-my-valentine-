@@ -3,95 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Valentine's Day Website</title>
+    <title>Will You Be My Valentine?</title>
     <style>
         body {
-            margin: 0;
-            padding: 0;
-            background: linear-gradient(45deg, #ff5c93, #ffb5c5);
-            overflow: hidden;
-            font-family: Arial, sans-serif;
+            background-color: pink;
+            text-align: center;
+            font-family: 'Arial', sans-serif;
         }
-        .container {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            position: relative;
-        }
-        h1 {
-            color: #fff;
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+        #timer {
+            font-size: 2em;
+            margin: 20px;
         }
         .rose {
-            position: absolute;
-            animation: float 5s infinite;
-            font-size: 3em;
-            pointer-events: none;
+            animation: float 3s infinite;
         }
         @keyframes float {
             0% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
+            50% { transform: translateY(-10px); }
             100% { transform: translateY(0); }
         }
-        .button {
-            padding: 10px 20px;
-            margin: 20px;
-            border: none;
-            border-radius: 5px;
-            background-color: #ff6b81;
-            color: white;
-            font-size: 1.5em;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        .button:hover { transform: scale(1.1); }
-        .no-button {
-            position: absolute;
-            right: 10%;
-            bottom: 10%;
+        .confetti {
+            /* Add your confetti styles here */
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Will You Be My Valentine? 🌹</h1>
-        <button class="button yes-button">YES 🌹</button>
-        <button class="button no-button">NO ❌</button>
-        <div id="confetti"></div>
-    </div>
+    <h1>Will You Be My Valentine?</h1>
+    <div id="timer"></div>
+    <img src="IMG_0576.jpeg" alt="Roses" />
+    <button id="yesButton">Yes</button>
+    <button id="noButton">No</button>
+    
     <script>
-        const yesButton = document.querySelector('.yes-button');
-        const noButton = document.querySelector('.no-button');
-        const confetti = document.getElementById('confetti');
-
-        // Interactive effects for YES button
-        yesButton.addEventListener('click', () => {
-            confettiAnimation();
-            alert('Yay! ❤️ You said YES!');
-        });
-
-        // NO button that runs away
-        noButton.addEventListener('click', () => {
-            noButton.style.transition = 'transform 0.5s';
-            noButton.style.transform = `translate(${Math.random() * 200 - 100}px, ${Math.random() * -100}px)`;
-            alert('Aww... 😢 You said NO!');
-        });
-
-        // Confetti animation
-        function confettiAnimation() {
-            // Simplified confetti animation logic
-            for (let i = 0; i < 100; i++) {
-                let confettiPiece = document.createElement('div');
-                confettiPiece.className = 'rose';
-                confettiPiece.innerHTML = '🌹';
-                confettiPiece.style.left = `${Math.random() * 100}vw`;
-                confettiPiece.style.top = `${Math.random() * 100}vh`;
-                document.body.appendChild(confettiPiece);
-                setTimeout(() => confettiPiece.remove(), 3000);
+        // Countdown Timer
+        const countdownDate = new Date("2026-02-14T00:00:00").getTime();
+        const timer = setInterval(() => {
+            const now = new Date().getTime();
+            const distance = countdownDate - now;
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            document.getElementById("timer").innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+            if (distance < 0) {
+                clearInterval(timer);
+                document.getElementById("timer").innerHTML = "It's Valentine's Day!";
             }
-        }
+        }, 1000);
+        
+        // Button Actions
+        document.getElementById('yesButton').onclick = () => alert("Yay! Can't wait to celebrate!");
+        document.getElementById('noButton').onclick = () => alert("Oh no! Maybe next time.");
     </script>
 </body>
 </html>
