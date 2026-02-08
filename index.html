@@ -1,10 +1,78 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Will you be my Valentine?</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Valentine’s Day!</title>
+    <style>
+        body {
+            background-color: #ffe6f2;
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+        h1 {
+            color: #e6007e;
+        }
+        .confetti {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        .timer {
+            font-size: 2em;
+            margin: 20px;
+        }
+        img {
+            width: 50%;
+            border-radius: 15px;
+        }
+    </style>
+    <script>
+        // Confetti Animation
+        function createConfetti() {
+            const colors = ['#F00', '#0F0', '#00F', '#FF0', '#F0F', '#0FF'];
+            for (let i = 0; i < 100; i++) {
+                const confetti = document.createElement('div');
+                confetti.style.position = 'absolute';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.width = '10px';
+                confetti.style.height = '10px';
+                confetti.style.left = Math.floor(Math.random() * window.innerWidth) + 'px';
+                confetti.style.top = Math.floor(Math.random() * window.innerHeight) + 'px';
+                document.body.appendChild(confetti);
+                setTimeout(() => {
+                    confetti.remove();
+                }, 3000);
+            }
+        }
+        // Timer
+        function startTimer() {
+            const countdownDate = new Date('2026-02-14T00:00:00').getTime();
+            const timerElement = document.getElementById('timer');
+            const x = setInterval(function() {
+                const now = new Date().getTime();
+                const distance = countdownDate - now;
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                timerElement.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+                if (distance < 0) {
+                    clearInterval(x);
+                    timerElement.innerHTML = "EXPIRED";
+                    createConfetti();
+                }
+            }, 1000);
+        }
+        window.onload = startTimer;
+    </script>
 </head>
 <body>
-    <h1>Will you be my Valentine?</h1>
-    <img src="IMG_0573.jpeg" alt="Couple photo">
+    <h1>Happy Valentine’s Day!</h1>
+    <div id="timer" class="timer"></div>
+    <img src="IMG_0573.jpeg" alt="Valentine's Day Image">
+    <button onclick="createConfetti()">Celebrate!</button>
 </body>
 </html>
