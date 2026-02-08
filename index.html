@@ -1,59 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Will You Be My Valentine?</title>
+    <title>Will You Be My Valentine</title>
     <style>
         body {
-            background-color: pink;
-            text-align: center;
-            font-family: 'Arial', sans-serif;
-        }
-        #timer {
-            font-size: 2em;
+            font-family: Arial, sans-serif;
             margin: 20px;
+            line-height: 1.6;
         }
-        .rose {
-            animation: float 3s infinite;
+        img {
+            max-width: 300px;
+            height: auto;
         }
-        @keyframes float {
-            0% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0); }
-        }
-        .confetti {
-            /* Add your confetti styles here */
+        .romantic-text {
+            margin: 20px 0;
+            font-size: 24px;
+            color: #e74c3c;
+            text-align: center;
         }
     </style>
 </head>
 <body>
-    <h1>Will You Be My Valentine?</h1>
-    <div id="timer"></div>
-    <img src="IMG_0576.jpeg" alt="Roses" />
-    <button id="yesButton">Yes</button>
-    <button id="noButton">No</button>
-    
-    <script>
-        // Countdown Timer
-        const countdownDate = new Date("2026-02-14T00:00:00").getTime();
-        const timer = setInterval(() => {
-            const now = new Date().getTime();
-            const distance = countdownDate - now;
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-            document.getElementById("timer").innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
-            if (distance < 0) {
-                clearInterval(timer);
-                document.getElementById("timer").innerHTML = "It's Valentine's Day!";
-            }
-        }, 1000);
-        
-        // Button Actions
-        document.getElementById('yesButton').onclick = () => alert("Yay! Can't wait to celebrate!");
-        document.getElementById('noButton').onclick = () => alert("Oh no! Maybe next time.");
-    </script>
+    <h1 class="romantic-text">Will You Be My Valentine?</h1>
+    <img src="valentine-image.jpg" alt="Valentine Image">
+    <p class="romantic-text">This special day is all about love and affection. Let's celebrate together!</p>
 </body>
 </html>
