@@ -3,76 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Valentine’s Day!</title>
+    <title>Will You Be My Valentine?</title>
     <style>
-        body {
-            background-color: #ffe6f2;
-            text-align: center;
-            font-family: Arial, sans-serif;
-        }
-        h1 {
-            color: #e6007e;
-        }
-        .confetti {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            overflow: hidden;
-        }
-        .timer {
-            font-size: 2em;
-            margin: 20px;
-        }
-        img {
-            width: 50%;
-            border-radius: 15px;
-        }
+        body { text-align: center; font-family: Arial, sans-serif; }
+        .button { padding: 10px 20px; margin: 10px; background-color: pink; border: none; border-radius: 5px; cursor: pointer; }
+        .confetti { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; }
     </style>
-    <script>
-        // Confetti Animation
-        function createConfetti() {
-            const colors = ['#F00', '#0F0', '#00F', '#FF0', '#F0F', '#0FF'];
-            for (let i = 0; i < 100; i++) {
-                const confetti = document.createElement('div');
-                confetti.style.position = 'absolute';
-                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                confetti.style.width = '10px';
-                confetti.style.height = '10px';
-                confetti.style.left = Math.floor(Math.random() * window.innerWidth) + 'px';
-                confetti.style.top = Math.floor(Math.random() * window.innerHeight) + 'px';
-                document.body.appendChild(confetti);
-                setTimeout(() => {
-                    confetti.remove();
-                }, 3000);
-            }
-        }
-        // Timer
-        function startTimer() {
-            const countdownDate = new Date('2026-02-14T00:00:00').getTime();
-            const timerElement = document.getElementById('timer');
-            const x = setInterval(function() {
-                const now = new Date().getTime();
-                const distance = countdownDate - now;
-                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-                timerElement.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
-                if (distance < 0) {
-                    clearInterval(x);
-                    timerElement.innerHTML = "EXPIRED";
-                    createConfetti();
-                }
-            }, 1000);
-        }
-        window.onload = startTimer;
-    </script>
 </head>
 <body>
-    <h1>Happy Valentine’s Day!</h1>
-    <div id="timer" class="timer"></div>
-    <img src="IMG_0573.jpeg" alt="Valentine's Day Image">
-    <button onclick="createConfetti()">Celebrate!</button>
+    <h1>Will You Be My Valentine?</h1>
+    <img src="IMG_0576.jpeg" alt="Couple Image" style="width: 50%;">
+    <div>
+        <button class="button" onclick="celebrate()">YES</button>
+        <button class="button" onclick="funnyMessage()">NO</button>
+    </div>
+    <script>
+        function celebrate() {
+            // Add confetti animation here
+            var confetti = document.createElement('div');
+            confetti.classList.add('confetti');
+            document.body.appendChild(confetti);
+            // Sample confetti animation logic
+            setTimeout(() => { confetti.remove(); }, 3000);
+            alert('Yay! Happy Valentine\'s Day! 🎉');
+        }
+        function funnyMessage() {
+            alert('Valentine’s Day is just another day to appreciate your food! 😂');
+        }
+    </script>
 </body>
 </html>
